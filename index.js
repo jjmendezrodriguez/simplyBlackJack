@@ -373,11 +373,11 @@ function checkGame() {
     showAlert("Dealer has better hand", false);
     resetGameState();
     return;
-  } // else {
-  //   message = "You Win!";
-  //   showAlert("Player Win!", false);
-  //   youWin();
-  // }
+  } else {
+    message = "You Win!";
+    showAlert("Player Win!", false);
+    youWin();
+  }
   messageEl.textContent = message;
   console.log("revisa check");
 }
