@@ -223,6 +223,7 @@ body {
 .title > h2 {
   display: flex;
   justify-content: start;
+  text-overflow: ellipsis;
 }
 
 #cards-el,
