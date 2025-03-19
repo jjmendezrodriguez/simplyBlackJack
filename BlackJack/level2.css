@@ -1,5 +1,5 @@
 /* Complete the CSS styling according to the provided design */
-@import url("/javaScript/level_2_update/resetSettings.css");
+@import url("./resetSettings.css");
 
 :root {
   --input-color: rgb(63, 150, 37);
@@ -26,7 +26,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-image: url("/javaScript/level_2_update/img/blackjack\ background.jpg");
+  background-image: url("/BlackJack/img/blackjack\ background.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -159,7 +159,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url("/javaScript/level_2_update/img/blackjack\ background.jpg");
+  background-image: url("./img/blackjack\ background.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -185,7 +185,7 @@ body {
   height: 250px;
   border: 15px solid black;
   border-radius: 50px;
-  background-image: url("/javaScript/level_2_update/img/background\ green.jpg");
+  background-image: url("./img/background\ green.jpg");
   margin-top: 10px;
 }
 
@@ -199,7 +199,7 @@ body {
   align-items: center;
   justify-content: center;
   text-transform: capitalize;
-  background-image: url("/javaScript/level_2_update/img/background\ green.jpg");
+  background-image: url("./img/background\ green.jpg");
   border: 5px solid black;
   border-radius: 8px;
   color: white;
@@ -321,7 +321,7 @@ button:active {
   align-items: center;
   justify-content: center;
   text-transform: capitalize;
-  background-image: url("/javaScript/level_2_update/img/background\ green.jpg");
+  background-image: url("./img/background\ green.jpg");
   border: 5px solid black;
   border-radius: 8px;
   color: white;
@@ -443,7 +443,7 @@ h4 {
     align-items: center;
     justify-content: center;
     text-transform: capitalize;
-    background-image: url("/javaScript/level_2_update/img/background\ green.jpg");
+    background-image: url("./img/background\ green.jpg");
     border: 5px solid black;
     border-radius: 8px;
     color: white;
