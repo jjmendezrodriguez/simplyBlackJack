@@ -417,7 +417,7 @@ function renderDGame() {
     hasAce = dealerCards.some((card) => card.value === "A");
     isSoft17 = hasAce && dealerSumCards === 17;
   }
-  if (dealerSumCards > 21) {
+  if (dealerSumCards > sum) {
     showAlert("Dealer Bust! Lose.", false);
     youWin();
     message = "Dealer Bust! Lose. You win!";
@@ -433,7 +433,7 @@ function renderDGame() {
     return;
   }
 
-  if (dealerSumCards > sum) {
+  if (dealerSumCards === sum) {
     message = "Dealer has better hand, He won!";
     showAlert("Dealer has better hand", false);
     resetGameState();
