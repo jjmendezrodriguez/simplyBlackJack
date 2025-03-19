@@ -167,6 +167,7 @@ const ChipsBtn = document.getElementById("chips-btn");
 ChipsBtn.addEventListener("click", addChips);
 
 function addChips() {
+  message = "Chips added! press play!";
   player.chips += 100;
   playerChips.textContent = `Chips: $${player.chips}`;
   alertMsg.classList.remove("active");
@@ -178,7 +179,6 @@ function addChips() {
 document.getElementById("stay").addEventListener("click", function () {
   if (inGame) {
     stayHand();
-    messageEl.textContent = message;
   } else {
     showAlert("You need to start the game!");
   }
@@ -305,6 +305,7 @@ function resetGameState(valueOne = false, valueTwo = false) {
   }
   isAlive = valueOne;
   inGame = valueTwo;
+  messageEl.textContent = message;
 }
 
 // Dealer ===============================================
@@ -372,11 +373,11 @@ function checkGame() {
     showAlert("Dealer has better hand", false);
     resetGameState();
     return;
-  } else {
-    message = "You Win!";
-    showAlert("Player Win!", false);
-    youWin();
-  }
+  } // else {
+  //   message = "You Win!";
+  //   showAlert("Player Win!", false);
+  //   youWin();
+  // }
   messageEl.textContent = message;
   console.log("revisa check");
 }
@@ -385,18 +386,27 @@ function checkGame() {
 
 function renderDGame() {
   dealerSumEl.textContent = `Sum: ${dealerSumCards}`;
-  messageEl.textContent = message;
 
-  console.log("primer if");
+  console.log(`${sumBet} primer if`);
   // 1️⃣ Si el dealer tiene más de 21, pierde automáticamente.
-  checkGame();
+  // checkGame();
+  if (dealerSumCards > sum) {
+    message = "Dealer has better hand, You Lose!";
+    showAlert("Dealer has better hand", false);
+    resetGameState();
+    return;
+  } else {
+    checkGame();
+  }
 
   // 3️⃣ Si el dealer tiene un "Soft 17" (A + 6), puede pedir otra carta.
   let hasAce = dealerCards.some((card) => card.value === "A");
   let isSoft17 = hasAce && dealerSumCards === 17;
+  if (dealerSumCards < 17 && inGame) {
+    console.log(`${dealerSumCards} ${inGame}  segundo if`);
 
-  if (dealerSumCards < 17) {
     while (dealerSumCards < 17 || isSoft17) {
+      console.log(`${dealerSumCards} ${inGame}  dentro`);
       let newCard = getRandomCard();
       dealerCards.push(newCard);
       dealerSumCards += getCardValue(newCard, dealerSumCards);
@@ -406,10 +416,12 @@ function renderDGame() {
       // Recalcular si sigue siendo Soft 17 después de la nueva carta
       hasAce = dealerCards.some((card) => card.value === "A");
       isSoft17 = hasAce && dealerSumCards === 17;
+      checkGame();
+      console.log(`${dealerSumCards} ${inGame}  saliendo`);
     }
   }
-  checkGame();
-  console.log("checkgame");
+  console.log("ultimo log");
+
   messageEl.textContent = message;
 }
 
