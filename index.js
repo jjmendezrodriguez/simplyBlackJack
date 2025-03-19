@@ -378,6 +378,7 @@ function checkGame() {
     youWin();
   }
   messageEl.textContent = message;
+  console.log("revisa check");
 }
 
 // Actualiza el estado del dealer y decide si debe tomar otra carta.
@@ -394,16 +395,18 @@ function renderDGame() {
   let hasAce = dealerCards.some((card) => card.value === "A");
   let isSoft17 = hasAce && dealerSumCards === 17;
 
-  while (dealerSumCards < 17 || isSoft17) {
-    let newCard = getRandomCard();
-    dealerCards.push(newCard);
-    dealerSumCards += getCardValue(newCard, dealerSumCards);
-    showDealerCards();
-    dealerSumEl.textContent = `Sum: ${dealerSumCards}`;
+  if (dealerSumCards < 17) {
+    while (dealerSumCards < 17 || isSoft17) {
+      let newCard = getRandomCard();
+      dealerCards.push(newCard);
+      dealerSumCards += getCardValue(newCard, dealerSumCards);
+      showDealerCards();
+      dealerSumEl.textContent = `Sum: ${dealerSumCards}`;
 
-    // Recalcular si sigue siendo Soft 17 después de la nueva carta
-    hasAce = dealerCards.some((card) => card.value === "A");
-    isSoft17 = hasAce && dealerSumCards === 17;
+      // Recalcular si sigue siendo Soft 17 después de la nueva carta
+      hasAce = dealerCards.some((card) => card.value === "A");
+      isSoft17 = hasAce && dealerSumCards === 17;
+    }
   }
   checkGame();
   console.log("checkgame");
