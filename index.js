@@ -434,8 +434,8 @@ function renderDGame() {
   }
 
   if (dealerSumCards === sum) {
-    message = "Dealer has better hand, He won!";
-    showAlert("Dealer has better hand", false);
+    message = "Tied Game!";
+    showAlert("Tied Game!", false);
     resetGameState();
   } else {
     message = "You Win!";
