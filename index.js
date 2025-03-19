@@ -351,7 +351,7 @@ function showDealerCards() {
 
 function checkGame() {
   if (dealerSumCards > 21) {
-    showAlert("Dealer Bust! Lose.", false);
+    showAlert("Dealer Bust! You Win!", false);
     youWin();
     message = "Dealer Bust! Lose. You win!";
     resetGameState();
@@ -373,13 +373,13 @@ function checkGame() {
     showAlert("Dealer has better hand", false);
     resetGameState();
     return;
-  } else {
-    message = "You Win!";
-    showAlert("Player Win!", false);
+  } else if (dealerSumCards >= 17 && dealerSumCards < sum) {
+    message = "Dealer Bust you have better cards! You Win!";
+    showAlert("Dealer Bust! You Win!", false);
     youWin();
+    return;
   }
   messageEl.textContent = message;
-  console.log("revisa check");
 }
 
 // Actualiza el estado del dealer y decide si debe tomar otra carta.
@@ -387,10 +387,7 @@ function checkGame() {
 function renderDGame() {
   dealerSumEl.textContent = `Sum: ${dealerSumCards}`;
 
-  console.log(`${sumBet} primer if`);
-  // 1️⃣ Si el dealer tiene más de 21, pierde automáticamente.
-  // checkGame();
-  if (dealerSumCards > sum) {
+  if (dealerSumCards > sum && dealerSumCards != 22) {
     message = "Dealer has better hand, You Lose!";
     showAlert("Dealer has better hand", false);
     resetGameState();
@@ -403,10 +400,7 @@ function renderDGame() {
   let hasAce = dealerCards.some((card) => card.value === "A");
   let isSoft17 = hasAce && dealerSumCards === 17;
   if (dealerSumCards < 17 && inGame) {
-    console.log(`${dealerSumCards} ${inGame}  segundo if`);
-
     while (dealerSumCards < 17 || isSoft17) {
-      console.log(`${dealerSumCards} ${inGame}  dentro`);
       let newCard = getRandomCard();
       dealerCards.push(newCard);
       dealerSumCards += getCardValue(newCard, dealerSumCards);
@@ -417,10 +411,8 @@ function renderDGame() {
       hasAce = dealerCards.some((card) => card.value === "A");
       isSoft17 = hasAce && dealerSumCards === 17;
       checkGame();
-      console.log(`${dealerSumCards} ${inGame}  saliendo`);
     }
   }
-  console.log("ultimo log");
 
   messageEl.textContent = message;
 }
