@@ -348,9 +348,75 @@ function showDealerCards() {
     .join(" ")}`;
 }
 
+function checkGame() {
+  //por ahora no la estoy usando
+  if (dealerSumCards > 21) {
+    showAlert("Dealer Bust! Lose.", false);
+    youWin();
+    message = "Dealer Bust! Lose. You win!";
+    resetGameState();
+    return;
+  }
+
+  // 2️⃣ Si el dealer tiene 21 exactos, gana automáticamente.
+  if (dealerSumCards === 21) {
+    message = "The dealer has Blackjack! You Lose!";
+    showAlert("The dealer has Blackjack!", false);
+    resetGameState();
+    return;
+  }
+
+  if (dealerSumCards > sum) {
+    message = "Dealer has better hand, You Lose!";
+    showAlert("Dealer has better hand", false);
+    resetGameState();
+  }
+  messageEl.textContent = message;
+}
+
 // Actualiza el estado del dealer y decide si debe tomar otra carta.
 
-function checkGame() {
+function renderDGame() {
+  dealerSumEl.textContent = `Sum: ${dealerSumCards}`;
+
+  // 1️⃣ Si el dealer tiene más de 21, pierde automáticamente.
+  if (dealerSumCards > 21) {
+    showAlert("Dealer Bust! Lose.", false);
+    youWin();
+    message = "Dealer Bust! Lose. You win!";
+    resetGameState();
+    return;
+  }
+
+  // 2️⃣ Si el dealer tiene 21 exactos, gana automáticamente.
+  if (dealerSumCards === 21) {
+    message = "The dealer has Blackjack! He won!";
+    showAlert("The dealer has Blackjack!", false);
+    resetGameState();
+    return;
+  }
+
+  if (dealerSumCards > sum) {
+    message = "Dealer has better hand, You Lose!";
+    showAlert("Dealer has better hand", false);
+    resetGameState();
+  }
+
+  // 3️⃣ Si el dealer tiene un "Soft 17" (A + 6), puede pedir otra carta.
+  let hasAce = dealerCards.some((card) => card.value === "A");
+  let isSoft17 = hasAce && dealerSumCards === 17;
+
+  while (dealerSumCards < 17 || isSoft17) {
+    let newCard = getRandomCard();
+    dealerCards.push(newCard);
+    dealerSumCards += getCardValue(newCard, dealerSumCards);
+    showDealerCards();
+    dealerSumEl.textContent = `Sum: ${dealerSumCards}`;
+
+    // Recalcular si sigue siendo Soft 17 después de la nueva carta
+    hasAce = dealerCards.some((card) => card.value === "A");
+    isSoft17 = hasAce && dealerSumCards === 17;
+  }
   if (dealerSumCards > 21) {
     showAlert("Dealer Bust! Lose.", false);
     youWin();
@@ -371,36 +437,6 @@ function checkGame() {
     message = "Dealer has better hand, He won!";
     showAlert("Dealer has better hand", false);
     resetGameState();
-  }
-  messageEl.textContent = message;
-}
-
-function renderDGame() {
-  dealerSumEl.textContent = `Sum: ${dealerSumCards}`;
-
-  // 1️⃣ Si el dealer tiene más de 21, pierde automáticamente.
-  if (dealerSumCards > 21) {
-    checkGame();
-    return;
-  }
-
-  // 3️⃣ Si el dealer tiene un "Soft 17" (A + 6), puede pedir otra carta.
-  let hasAce = dealerCards.some((card) => card.value === "A");
-  let isSoft17 = hasAce && dealerSumCards === 17;
-
-  while (dealerSumCards < 17 || isSoft17) {
-    let newCard = getRandomCard();
-    dealerCards.push(newCard);
-    dealerSumCards += getCardValue(newCard, dealerSumCards);
-    showDealerCards();
-    dealerSumEl.textContent = `Sum: ${dealerSumCards}`;
-
-    // Recalcular si sigue siendo Soft 17 después de la nueva carta
-    hasAce = dealerCards.some((card) => card.value === "A");
-    isSoft17 = hasAce && dealerSumCards === 17;
-  }
-  if (dealerSumCards > 21) {
-    checkGame();
   } else {
     message = "You Win!";
     showAlert("Player Win!", false);

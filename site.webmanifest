@@ -1,6 +1,6 @@
 {
-  "name": "MyWebSite",
-  "short_name": "MySite",
+  "name": "jmsimplyBlackjack",
+  "short_name": "SBJ",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",

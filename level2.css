@@ -15,7 +15,7 @@ body {
   margin: 0 auto;
   touch-action: manipulation;
   overflow-y: auto;
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 /* main menu section */
@@ -25,8 +25,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  background-image: url("/BlackJack/img/blackjack\ background.jpg");
+  height: 100dvh;
+  background-image: url("./blackjack\ background.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -159,12 +159,12 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url("./img/blackjack\ background.jpg");
+  background-image: url("./blackjack\ background.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   overflow: auto;
-  height: 100vh;
+  height: 100dvh;
 }
 
 #game-container.active {
@@ -185,7 +185,7 @@ body {
   height: 250px;
   border: 15px solid black;
   border-radius: 50px;
-  background-image: url("./img/background\ green.jpg");
+  background-image: url("./background\ green.jpg");
   margin-top: 10px;
 }
 
@@ -199,7 +199,7 @@ body {
   align-items: center;
   justify-content: center;
   text-transform: capitalize;
-  background-image: url("./img/background\ green.jpg");
+  background-image: url("./background\ green.jpg");
   border: 5px solid black;
   border-radius: 8px;
   color: white;
@@ -321,7 +321,7 @@ button:active {
   align-items: center;
   justify-content: center;
   text-transform: capitalize;
-  background-image: url("./img/background\ green.jpg");
+  background-image: url("./background\ green.jpg");
   border: 5px solid black;
   border-radius: 8px;
   color: white;
@@ -375,7 +375,7 @@ h4 {
   }
 
   #game-container {
-    height: 100vh;
+    height: 100dvh;
   }
 
   #table-container {
@@ -443,7 +443,7 @@ h4 {
     align-items: center;
     justify-content: center;
     text-transform: capitalize;
-    background-image: url("./img/background\ green.jpg");
+    background-image: url("./background\ green.jpg");
     border: 5px solid black;
     border-radius: 8px;
     color: white;
