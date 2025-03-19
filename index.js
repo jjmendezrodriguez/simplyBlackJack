@@ -349,27 +349,33 @@ function showDealerCards() {
 }
 
 function checkGame() {
-  //por ahora no la estoy usando
   if (dealerSumCards > 21) {
     showAlert("Dealer Bust! Lose.", false);
     youWin();
     message = "Dealer Bust! Lose. You win!";
     resetGameState();
     return;
-  }
-
-  // 2️⃣ Si el dealer tiene 21 exactos, gana automáticamente.
-  if (dealerSumCards === 21) {
+  } else if (dealerSumCards === 21) {
     message = "The dealer has Blackjack! You Lose!";
     showAlert("The dealer has Blackjack!", false);
     resetGameState();
     return;
-  }
-
-  if (dealerSumCards > sum) {
+  } else if (dealerSumCards === sum) {
+    message = "Tied Game!";
+    showAlert("Tied Game!", false);
+    player.chips += sumBet - 10;
+    playerChips.textContent = `Chips: $${player.chips}`;
+    resetGameState();
+    return;
+  } else if (dealerSumCards > sum) {
     message = "Dealer has better hand, You Lose!";
     showAlert("Dealer has better hand", false);
     resetGameState();
+    return;
+  } else {
+    message = "You Win!";
+    showAlert("Player Win!", false);
+    youWin();
   }
   messageEl.textContent = message;
 }
@@ -378,29 +384,11 @@ function checkGame() {
 
 function renderDGame() {
   dealerSumEl.textContent = `Sum: ${dealerSumCards}`;
+  messageEl.textContent = message;
 
+  console.log("primer if");
   // 1️⃣ Si el dealer tiene más de 21, pierde automáticamente.
-  if (dealerSumCards > 21) {
-    showAlert("Dealer Bust! Lose.", false);
-    youWin();
-    message = "Dealer Bust! Lose. You win!";
-    resetGameState();
-    return;
-  }
-
-  // 2️⃣ Si el dealer tiene 21 exactos, gana automáticamente.
-  if (dealerSumCards === 21) {
-    message = "The dealer has Blackjack! He won!";
-    showAlert("The dealer has Blackjack!", false);
-    resetGameState();
-    return;
-  }
-
-  if (dealerSumCards > sum) {
-    message = "Dealer has better hand, You Lose!";
-    showAlert("Dealer has better hand", false);
-    resetGameState();
-  }
+  checkGame();
 
   // 3️⃣ Si el dealer tiene un "Soft 17" (A + 6), puede pedir otra carta.
   let hasAce = dealerCards.some((card) => card.value === "A");
@@ -417,31 +405,8 @@ function renderDGame() {
     hasAce = dealerCards.some((card) => card.value === "A");
     isSoft17 = hasAce && dealerSumCards === 17;
   }
-  if (dealerSumCards > sum) {
-    showAlert("Dealer Bust! Lose.", false);
-    youWin();
-    message = "Dealer Bust! Lose. You win!";
-    resetGameState();
-    return;
-  }
-
-  // 2️⃣ Si el dealer tiene 21 exactos, gana automáticamente.
-  if (dealerSumCards === 21) {
-    message = "The dealer has Blackjack! He won!";
-    showAlert("The dealer has Blackjack!", false);
-    resetGameState();
-    return;
-  }
-
-  if (dealerSumCards === sum) {
-    message = "Tied Game!";
-    showAlert("Tied Game!", false);
-    resetGameState();
-  } else {
-    message = "You Win!";
-    showAlert("Player Win!", false);
-    youWin();
-  }
+  checkGame();
+  console.log("checkgame");
   messageEl.textContent = message;
 }
 
