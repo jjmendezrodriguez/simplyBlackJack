@@ -55,4 +55,4 @@ Crea un Pull Request.
 
 ## Licencia
 
-Este proyecto está bajo la Licencia MIT - consulta el archivo LICENSE para más detalles.
+Este proyecto está bajo la Licencia -- - consulta el archivo LICENSE para más detalles.
